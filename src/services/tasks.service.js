@@ -19,3 +19,8 @@ export const getTasklistService = async (tasklist) => {
 
   return chosenTasklist;
 };
+
+export const getTaskByIdService = async (id) => {
+  const chosenTask = await Task.findById(id);
+  return chosenTask;
+};
