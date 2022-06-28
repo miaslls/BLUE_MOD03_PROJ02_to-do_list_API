@@ -6,6 +6,7 @@ import {
   getAllTasksService,
   getTasklistService,
   getTaskByIdService,
+  addTaskService,
 } from '../services/tasks.service.js';
 
 export const getAllTasksController = async (req, res) => {
@@ -38,4 +39,18 @@ export const getTaskByIdController = async (req, res) => {
   }
 
   res.send(chosenTask);
+};
+
+export const addTaskController = async (req, res) => {
+  const taskBody = req.body;
+
+  if (!taskBody || !taskBody.text || !taskBody.tasklist) {
+    return res.status(400).send({
+      message: 'incomplete data',
+    });
+  }
+
+  const newTask = await addTaskService(taskBody);
+
+  res.status(201).send({ message: 'added', newTask });
 };

@@ -24,3 +24,8 @@ export const getTaskByIdService = async (id) => {
   const chosenTask = await Task.findById(id);
   return chosenTask;
 };
+
+export const addTaskService = async (newTask) => {
+  const addedTask = await Task.create(newTask);
+  return addedTask;
+};
