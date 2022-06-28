@@ -4,7 +4,7 @@ import mongoose from 'mongoose';
 
 const databaseConnection = () => {
   mongoose
-    .connect('mongodb://localhost:27017/miatasks', {
+    .connect('mongodb://localhost:27017/miatasks-db', {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     })
