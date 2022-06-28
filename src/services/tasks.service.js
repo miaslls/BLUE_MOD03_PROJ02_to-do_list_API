@@ -21,3 +21,7 @@ export const addTaskService = async (newTask) => {
 export const updateTaskService = async (id, taskBody) => {
   return await Task.findByIdAndUpdate(id, taskBody).setOptions({ returnOriginal: false });
 };
+
+export const deleteTaskService = async (id) => {
+  return await Task.findByIdAndDelete(id);
+};
