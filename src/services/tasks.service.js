@@ -8,15 +8,7 @@ export const getAllTasksService = async () => {
 };
 
 export const getTasklistService = async (tasklist) => {
-  const chosenTasklist = [];
-  const allTasks = await Task.find();
-
-  for (let task of allTasks) {
-    if (task.tasklist === tasklist) {
-      chosenTasklist.push(task);
-    }
-  }
-
+  const chosenTasklist = await Task.find({ tasklist: tasklist });
   return chosenTasklist;
 };
 
