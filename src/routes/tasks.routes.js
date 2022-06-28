@@ -3,8 +3,9 @@
 import express from 'express';
 const router = express.Router();
 
-import { getAllTasksController } from '../controllers/tasks.controller.js';
+import { getAllTasksController, getTasklistController } from '../controllers/tasks.controller.js';
 
 router.get('/tasklist/all', getAllTasksController);
+router.get('/tasklist/:tasklist', getTasklistController);
 
 export default router;
