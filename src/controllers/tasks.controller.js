@@ -1,9 +1,8 @@
 'use strict';
 
-import { getText } from '../services/tasks.service.js';
+import { getAllTasksService } from '../services/tasks.service.js';
 
-export const hello = (req, res) => {
-  const text = getText();
-  console.log(text);
-  res.send(text);
+export const getAllTasksController = async (req, res) => {
+  const allTasks = await getAllTasksService();
+  res.send(allTasks);
 };

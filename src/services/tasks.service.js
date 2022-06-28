@@ -2,4 +2,7 @@
 
 import Task from '../models/Task.js';
 
-export const getText = () => 'hello, world!';
+export const getAllTasksService = async () => {
+  const allTasks = await Task.find();
+  return allTasks;
+};

@@ -3,8 +3,8 @@
 import express from 'express';
 const router = express.Router();
 
-import { hello } from '../controllers/tasks.controller.js';
+import { getAllTasksController } from '../controllers/tasks.controller.js';
 
-router.get('/', hello);
+router.get('/tasklist/all', getAllTasksController);
 
 export default router;
