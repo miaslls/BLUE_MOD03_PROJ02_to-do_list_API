@@ -15,7 +15,13 @@ export const validId = (req, res, next) => {
 export const validObjectBody = (req, res, next) => {
   const taskBody = req.body;
 
-  if (!taskBody || !taskBody.text || !taskBody.tasklist) {
+  if (
+    !taskBody ||
+    !taskBody.text ||
+    !taskBody.tasklist ||
+    taskBody.star === undefined ||
+    taskBody.complete === undefined
+  ) {
     return res.status(400).send({ message: 'incomplete data' });
   }
 

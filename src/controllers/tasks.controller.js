@@ -89,3 +89,22 @@ export const deleteTaskController = async (req, res) => {
 
   res.status(200).send({ message: 'deleted', data: deletedTask });
 };
+
+// 📌 ----- PUT toggle starred/completed
+
+export const toggleTaskOptionController = async (req, res) => {
+  const idParam = req.params.id;
+  const optionParam = req.params.option;
+
+  const taskToUpdateOption = await getTaskByIdService(idParam);
+
+  if (!taskToUpdateOption) {
+    return res.status(404).send({ message: 'task not found' });
+  }
+
+  taskToUpdateOption[optionParam] = !taskToUpdateOption[optionParam]; // toggle boolean
+
+  const updatedTaskOption = await updateTaskService(idParam, taskToUpdateOption);
+
+  res.status(200).send({ message: 'starred', data: updatedTaskOption });
+};
