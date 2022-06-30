@@ -106,5 +106,5 @@ export const toggleTaskOptionController = async (req, res) => {
 
   const updatedTaskOption = await updateTaskService(idParam, taskToUpdateOption);
 
-  res.status(200).send({ message: 'starred', data: updatedTaskOption });
+  res.status(200).send({ data: updatedTaskOption });
 };
