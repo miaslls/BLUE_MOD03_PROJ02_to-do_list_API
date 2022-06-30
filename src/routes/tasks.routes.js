@@ -12,11 +12,13 @@ import {
   deleteTaskController,
 } from '../controllers/tasks.controller.js';
 
+import { validId, validObjectBody } from '../middleware/tasks.middleware.js';
+
 router.get('/tasklist/all', getAllTasksController);
 router.get('/tasklist/:tasklist', getTasklistController);
-router.get('/task/:id', getTaskByIdController);
-router.post('/task/add', addTaskController);
-router.put('/task/update/:id', updateTaskController);
-router.delete('/task/delete/:id', deleteTaskController);
+router.get('/task/:id', validId, getTaskByIdController);
+router.post('/task/add', validObjectBody, addTaskController);
+router.put('/task/update/:id', validId, validObjectBody, updateTaskController);
+router.delete('/task/delete/:id', validId, deleteTaskController);
 
 export default router;

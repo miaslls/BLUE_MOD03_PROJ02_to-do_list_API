@@ -1,7 +1,5 @@
 'use strict';
 
-import mongoose from 'mongoose';
-
 import {
   getAllTasksService,
   getTasklistService,
@@ -15,7 +13,12 @@ import {
 
 export const getAllTasksController = async (req, res) => {
   const allTasks = await getAllTasksService();
-  res.status(200).send(allTasks);
+
+  if (allTasks.length === 0) {
+    res.status(206).send({ message: 'no tasks' });
+  } else {
+    res.send({ data: allTasks });
+  }
 };
 
 // 📌 ----- GET tasklist
@@ -24,10 +27,10 @@ export const getTasklistController = async (req, res) => {
   const tasklistParam = req.params.tasklist;
   const chosenTasklist = await getTasklistService(tasklistParam);
 
-  if (chosenTasklist[0] === undefined) {
+  if (chosenTasklist.length === 0) {
     res.status(206).send({ message: 'tasklist empty' });
   } else {
-    res.send({ tasklist: tasklistParam, chosenTasklist });
+    res.send({ tasklist: tasklistParam, data: chosenTasklist });
   }
 };
 
@@ -36,31 +39,22 @@ export const getTasklistController = async (req, res) => {
 export const getTaskByIdController = async (req, res) => {
   const idParam = req.params.id;
 
-  if (!mongoose.Types.ObjectId.isValid(idParam)) {
-    return res.status(400).send({ message: 'invalid ID' });
-  }
-
   const chosenTask = await getTaskByIdService(idParam);
 
   if (!chosenTask) {
     return res.status(404).send({ message: 'task not found' });
   }
 
-  res.send(chosenTask);
+  res.status(200).send({ data: chosenTask });
 };
 
 // 📌 ----- PUT add task
 
 export const addTaskController = async (req, res) => {
   const taskBody = req.body;
-
-  if (!taskBody || !taskBody.text || !taskBody.tasklist) {
-    return res.status(400).send({ message: 'incomplete data' });
-  }
-
   const newTask = await addTaskService(taskBody);
 
-  res.status(201).send({ message: 'added', newTask });
+  res.status(201).send({ message: 'added', data: newTask });
 };
 
 // 📌 ----- POST update task
@@ -69,33 +63,21 @@ export const updateTaskController = async (req, res) => {
   const idParam = req.params.id;
   const taskBody = req.body;
 
-  if (!mongoose.Types.ObjectId.isValid(idParam)) {
-    return res.status(400).send({ message: 'invalid ID' });
-  }
-
   const taskToBeUpdated = await getTaskByIdService(idParam);
 
   if (!taskToBeUpdated) {
     return res.status(404).send({ message: 'task not found' });
   }
 
-  if (!taskBody || !taskBody.text || !taskBody.tasklist) {
-    return res.status(400).send({ message: 'incomplete data' });
-  }
-
   const updatedTask = await updateTaskService(idParam, taskBody);
 
-  res.status(200).send({ message: 'updated', updatedTask });
+  res.status(200).send({ message: 'updated', data: updatedTask });
 };
 
 // 📌 ----- DELETE task
 
 export const deleteTaskController = async (req, res) => {
   const idParam = req.params.id;
-
-  if (!mongoose.Types.ObjectId.isValid(idParam)) {
-    return res.status(400).send({ message: 'invalid ID' });
-  }
 
   const taskToBeDeleted = await getTaskByIdService(idParam);
 
@@ -105,5 +87,5 @@ export const deleteTaskController = async (req, res) => {
 
   const deletedTask = await deleteTaskService(idParam);
 
-  res.status(200).send({ message: 'deleted', deletedTask });
+  res.status(200).send({ message: 'deleted', data: deletedTask });
 };
