@@ -6,8 +6,8 @@ const TaskSchema = new mongoose.Schema(
   {
     text: { type: String, required: true },
     tasklist: { type: String, required: true },
-    priority: { type: Boolean, required: false },
-    completed: { type: Boolean, required: false },
+    star: { type: Boolean, required: true },
+    complete: { type: Boolean, required: true },
   },
   { collection: 'tasks', versionKey: false },
 );
