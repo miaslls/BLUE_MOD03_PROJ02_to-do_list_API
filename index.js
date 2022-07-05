@@ -2,9 +2,9 @@
 
 const express = require('express');
 const cors = require('cors');
-const taskRoutes = require('./src/routes/tasks.routes.js');
-const swaggerRoutes = require('./src/routes/swagger.routes.js');
-const databaseConnection = require('./src/database/dbConnection.js');
+const taskRoutes = require('./src/routes/tasks.routes');
+const swaggerRoutes = require('./src/routes/swagger.routes');
+const databaseConnection = require('./src/database/dbConnection');
 
 const app = express();
 const port = 3000;

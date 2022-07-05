@@ -11,9 +11,9 @@ const {
   updateTaskController,
   deleteTaskController,
   toggleTaskOptionController,
-} = require('../controllers/tasks.controller.js');
+} = require('../controllers/tasks.controller');
 
-const { validId, validObjectBody } = require('../middleware/tasks.middleware.js');
+const { validId, validObjectBody } = require('../middleware/tasks.middleware');
 
 router.get('/', getAllTasksController);
 router.get('/:tasklist', getTasklistController);

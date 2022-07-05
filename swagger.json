@@ -91,10 +91,11 @@
           {
             "name": "id",
             "in": "path",
-            "required": "true",
-            "description": "ID of the task to **get**. format: 24 character hexadecimal",
+            "required": true,
+            "description": "ID of the task to get, 24 character hexadecimal",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "example": "62bda4d21bc077eeb478a9da"
             }
           }
         ],
@@ -119,7 +120,7 @@
           {
             "name": "id",
             "in": "path",
-            "required": "true",
+            "required": true,
             "description": "ID of the task to **update**. format: 24 character hexadecimal",
             "schema": {
               "type": "string"
@@ -164,7 +165,7 @@
           {
             "name": "id",
             "in": "path",
-            "required": "true",
+            "required": true,
             "description": "ID of the task to **delete**. format: 24 character hexadecimal",
             "schema": {
               "type": "string"
@@ -194,7 +195,7 @@
           {
             "name": "tasklist",
             "in": "path",
-            "required": "true",
+            "required": true,
             "description": "name of the tasklist to **get**.",
             "schema": {
               "type": "string",
@@ -232,7 +233,7 @@
           {
             "name": "option",
             "in": "path",
-            "required": "true",
+            "required": true,
             "description": "name of the option to **toggle**",
             "schema": {
               "type": "string",
@@ -242,7 +243,7 @@
           {
             "name": "id",
             "in": "path",
-            "required": "true",
+            "required": true,
             "description": "ID of the task to **toggle option**. format: 24 character hexadecimal",
             "schema": {
               "type": "string"
@@ -289,21 +290,13 @@
         "content": {
           "application/json": {
             "schema": {
-              "type": "object",
               "$ref": "#/components/schemas/Task"
             }
           }
         }
       },
       "badRequest": {
-        "description": "invalid **ID** OR invalid **object body**",
-        "content": {
-          "text/plain": {
-            "schema": {
-              "type": "string"
-            }
-          }
-        }
+        "description": "invalid **ID** OR invalid **object body**"
       },
       "notFound": {
         "description": "the specified resource was **NOT FOUND**"

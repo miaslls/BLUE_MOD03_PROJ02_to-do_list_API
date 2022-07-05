@@ -7,7 +7,7 @@ const {
   addTaskService,
   updateTaskService,
   deleteTaskService,
-} = require('../services/tasks.service.js');
+} = require('../services/tasks.service');
 
 // 📌 ----- GET all tasks
 
@@ -15,7 +15,7 @@ const getAllTasksController = async (req, res) => {
   const allTasks = await getAllTasksService();
 
   if (allTasks.length === 0) {
-    res.status(204);
+    return res.status(204);
   } else {
     res.status(200).send(allTasks);
   }
@@ -28,7 +28,7 @@ const getTasklistController = async (req, res) => {
   const chosenTasklist = await getTasklistService(tasklistParam);
 
   if (chosenTasklist.length === 0) {
-    res.status(204);
+    return res.status(204);
   } else {
     res.send(chosenTasklist);
   }
@@ -45,7 +45,7 @@ const getTaskByIdController = async (req, res) => {
     return res.status(404);
   }
 
-  res.status(200).send(chosenTask);
+  res.status(200).send({ chosenTask });
 };
 
 // 📌 ----- PUT add task
