@@ -15,9 +15,9 @@ const getAllTasksController = async (req, res) => {
   const allTasks = await getAllTasksService();
 
   if (allTasks.length === 0) {
-    res.status(206).send({ message: 'no tasks' });
+    res.status(204);
   } else {
-    res.send({ data: allTasks });
+    res.status(200).send({ allTasks });
   }
 };
 
@@ -28,7 +28,7 @@ const getTasklistController = async (req, res) => {
   const chosenTasklist = await getTasklistService(tasklistParam);
 
   if (chosenTasklist.length === 0) {
-    res.status(206).send({ message: 'tasklist empty' });
+    res.status(204);
   } else {
     res.send({ tasklist: tasklistParam, data: chosenTasklist });
   }
@@ -42,7 +42,7 @@ const getTaskByIdController = async (req, res) => {
   const chosenTask = await getTaskByIdService(idParam);
 
   if (!chosenTask) {
-    return res.status(404).send({ message: 'task not found' });
+    return res.status(404);
   }
 
   res.status(200).send({ data: chosenTask });
@@ -66,7 +66,7 @@ const updateTaskController = async (req, res) => {
   const taskToBeUpdated = await getTaskByIdService(idParam);
 
   if (!taskToBeUpdated) {
-    return res.status(404).send({ message: 'task not found' });
+    return res.status(404);
   }
 
   const updatedTask = await updateTaskService(idParam, taskBody);
@@ -82,12 +82,12 @@ const deleteTaskController = async (req, res) => {
   const taskToBeDeleted = await getTaskByIdService(idParam);
 
   if (!taskToBeDeleted) {
-    return res.status(404).send({ message: 'task not found' });
+    return res.status(404);
   }
 
-  const deletedTask = await deleteTaskService(idParam);
+  await deleteTaskService(idParam);
 
-  res.status(200).send({ message: 'deleted', data: deletedTask });
+  res.status(204);
 };
 
 // 📌 ----- PUT toggle starred/completed
@@ -99,7 +99,7 @@ const toggleTaskOptionController = async (req, res) => {
   const taskToUpdateOption = await getTaskByIdService(idParam);
 
   if (!taskToUpdateOption) {
-    return res.status(404).send({ message: 'task not found' });
+    return res.status(404);
   }
 
   taskToUpdateOption[optionParam] = !taskToUpdateOption[optionParam]; // toggle boolean
