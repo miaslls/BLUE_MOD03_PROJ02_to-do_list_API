@@ -1,9 +1,9 @@
 'use strict';
 
-const express = require('express');
+import express from 'express';
 const router = express.Router();
 
-const {
+import {
   getAllTasksController,
   getTasklistController,
   getTaskByIdController,
@@ -11,16 +11,16 @@ const {
   updateTaskController,
   deleteTaskController,
   toggleTaskOptionController,
-} = require('../controllers/tasks.controller');
+} from '../controllers/tasks.controller.js';
 
-const { validId, validObjectBody } = require('../middleware/tasks.middleware');
+import { validId, validObjectBody } from '../middleware/tasks.middleware.js';
 
-router.get('/', getAllTasksController);
-router.get('/:tasklist', getTasklistController);
-router.get('/:id', validId, getTaskByIdController);
-router.post('/', validObjectBody, addTaskController);
-router.put('/:id', validId, validObjectBody, updateTaskController);
-router.delete('/:id', validId, deleteTaskController);
-router.put('/:option/:id', validId, toggleTaskOptionController);
+router.get('/tasklist/all', getAllTasksController);
+router.get('/tasklist/:tasklist', getTasklistController);
+router.get('/task/:id', validId, getTaskByIdController);
+router.post('/task/add', validObjectBody, addTaskController);
+router.put('/task/update/:id', validId, validObjectBody, updateTaskController);
+router.delete('/task/delete/:id', validId, deleteTaskController);
+router.put('/task/:option/:id', validId, toggleTaskOptionController);
 
-module.exports = router;
+export default router;

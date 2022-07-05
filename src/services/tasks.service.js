@@ -1,36 +1,27 @@
 'use strict';
 
-const Task = require('../models/Task.js');
+import Task from '../models/Task.js';
 
-const getAllTasksService = async () => {
+export const getAllTasksService = async () => {
   return await Task.find();
 };
 
-const getTasklistService = async (tasklist) => {
+export const getTasklistService = async (tasklist) => {
   return await Task.find({ tasklist: tasklist });
 };
 
-const getTaskByIdService = async (id) => {
+export const getTaskByIdService = async (id) => {
   return await Task.findById(id);
 };
 
-const addTaskService = async (newTask) => {
+export const addTaskService = async (newTask) => {
   return await Task.create(newTask);
 };
 
-const updateTaskService = async (id, taskBody) => {
+export const updateTaskService = async (id, taskBody) => {
   return await Task.findByIdAndUpdate(id, taskBody).setOptions({ returnOriginal: false });
 };
 
-const deleteTaskService = async (id) => {
+export const deleteTaskService = async (id) => {
   return await Task.findByIdAndDelete(id);
-};
-
-module.exports = {
-  getAllTasksService,
-  getTasklistService,
-  getTaskByIdService,
-  addTaskService,
-  updateTaskService,
-  deleteTaskService,
 };

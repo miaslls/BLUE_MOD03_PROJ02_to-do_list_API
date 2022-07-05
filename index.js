@@ -1,10 +1,9 @@
 'use strict';
 
-const express = require('express');
-const cors = require('cors');
-const taskRoutes = require('./src/routes/tasks.routes');
-const swaggerRoutes = require('./src/routes/swagger.routes');
-const databaseConnection = require('./src/database/dbConnection');
+import express from 'express';
+import cors from 'cors';
+import routes from './src/routes/tasks.routes.js';
+import databaseConnection from './src/database/dbConnection.js';
 
 const app = express();
 const port = 3000;
@@ -13,8 +12,7 @@ databaseConnection();
 
 app.use(express.json());
 app.use(cors());
-app.use('/tasks', taskRoutes);
-app.use('/api', swaggerRoutes);
+app.use('/', routes);
 
 app.listen(port, () => {
   console.log(`server running @ http://localhost:${port} 🔗`);

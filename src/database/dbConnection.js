@@ -1,6 +1,6 @@
 'use strict';
 
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const databaseConnection = () => {
   mongoose
@@ -16,4 +16,4 @@ const databaseConnection = () => {
     });
 };
 
-module.exports = databaseConnection;
+export default databaseConnection;

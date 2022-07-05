@@ -1,8 +1,8 @@
 'use strict';
 
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
-const validId = (req, res, next) => {
+export const validId = (req, res, next) => {
   const idParam = req.params.id;
 
   if (!mongoose.Types.ObjectId.isValid(idParam)) {
@@ -12,7 +12,7 @@ const validId = (req, res, next) => {
   next();
 };
 
-const validObjectBody = (req, res, next) => {
+export const validObjectBody = (req, res, next) => {
   const taskBody = req.body;
 
   if (
@@ -27,5 +27,3 @@ const validObjectBody = (req, res, next) => {
 
   next();
 };
-
-module.exports = { validId, validObjectBody };
