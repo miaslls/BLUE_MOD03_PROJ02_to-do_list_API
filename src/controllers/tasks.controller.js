@@ -17,7 +17,7 @@ const getAllTasksController = async (req, res) => {
   if (allTasks.length === 0) {
     res.status(204);
   } else {
-    res.status(200).send({ allTasks });
+    res.status(200).send(allTasks);
   }
 };
 
@@ -30,7 +30,7 @@ const getTasklistController = async (req, res) => {
   if (chosenTasklist.length === 0) {
     res.status(204);
   } else {
-    res.send({ tasklist: tasklistParam, data: chosenTasklist });
+    res.send(chosenTasklist);
   }
 };
 
@@ -45,7 +45,7 @@ const getTaskByIdController = async (req, res) => {
     return res.status(404);
   }
 
-  res.status(200).send({ data: chosenTask });
+  res.status(200).send(chosenTask);
 };
 
 // 📌 ----- PUT add task
@@ -54,7 +54,7 @@ const addTaskController = async (req, res) => {
   const taskBody = req.body;
   const newTask = await addTaskService(taskBody);
 
-  res.status(201).send({ message: 'added', data: newTask });
+  res.status(201).send(newTask);
 };
 
 // 📌 ----- POST update task
@@ -71,7 +71,7 @@ const updateTaskController = async (req, res) => {
 
   const updatedTask = await updateTaskService(idParam, taskBody);
 
-  res.status(200).send({ message: 'updated', data: updatedTask });
+  res.status(200).send(updatedTask);
 };
 
 // 📌 ----- DELETE task
@@ -106,7 +106,7 @@ const toggleTaskOptionController = async (req, res) => {
 
   const updatedTaskOption = await updateTaskService(idParam, taskToUpdateOption);
 
-  res.status(200).send({ data: updatedTaskOption });
+  res.status(200).send(updatedTaskOption);
 };
 
 module.exports = {
