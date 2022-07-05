@@ -1,17 +1,17 @@
 'use strict';
 
-import {
+const {
   getAllTasksService,
   getTasklistService,
   getTaskByIdService,
   addTaskService,
   updateTaskService,
   deleteTaskService,
-} from '../services/tasks.service.js';
+} = require('../services/tasks.service.js');
 
 // 📌 ----- GET all tasks
 
-export const getAllTasksController = async (req, res) => {
+const getAllTasksController = async (req, res) => {
   const allTasks = await getAllTasksService();
 
   if (allTasks.length === 0) {
@@ -23,7 +23,7 @@ export const getAllTasksController = async (req, res) => {
 
 // 📌 ----- GET tasklist
 
-export const getTasklistController = async (req, res) => {
+const getTasklistController = async (req, res) => {
   const tasklistParam = req.params.tasklist;
   const chosenTasklist = await getTasklistService(tasklistParam);
 
@@ -36,7 +36,7 @@ export const getTasklistController = async (req, res) => {
 
 // 📌 ----- GET task by ID
 
-export const getTaskByIdController = async (req, res) => {
+const getTaskByIdController = async (req, res) => {
   const idParam = req.params.id;
 
   const chosenTask = await getTaskByIdService(idParam);
@@ -50,7 +50,7 @@ export const getTaskByIdController = async (req, res) => {
 
 // 📌 ----- PUT add task
 
-export const addTaskController = async (req, res) => {
+const addTaskController = async (req, res) => {
   const taskBody = req.body;
   const newTask = await addTaskService(taskBody);
 
@@ -59,7 +59,7 @@ export const addTaskController = async (req, res) => {
 
 // 📌 ----- POST update task
 
-export const updateTaskController = async (req, res) => {
+const updateTaskController = async (req, res) => {
   const idParam = req.params.id;
   const taskBody = req.body;
 
@@ -76,7 +76,7 @@ export const updateTaskController = async (req, res) => {
 
 // 📌 ----- DELETE task
 
-export const deleteTaskController = async (req, res) => {
+const deleteTaskController = async (req, res) => {
   const idParam = req.params.id;
 
   const taskToBeDeleted = await getTaskByIdService(idParam);
@@ -92,7 +92,7 @@ export const deleteTaskController = async (req, res) => {
 
 // 📌 ----- PUT toggle starred/completed
 
-export const toggleTaskOptionController = async (req, res) => {
+const toggleTaskOptionController = async (req, res) => {
   const idParam = req.params.id;
   const optionParam = req.params.option;
 
@@ -107,4 +107,14 @@ export const toggleTaskOptionController = async (req, res) => {
   const updatedTaskOption = await updateTaskService(idParam, taskToUpdateOption);
 
   res.status(200).send({ data: updatedTaskOption });
+};
+
+module.exports = {
+  getAllTasksController,
+  getTasklistController,
+  getTaskByIdController,
+  addTaskController,
+  updateTaskController,
+  deleteTaskController,
+  toggleTaskOptionController,
 };

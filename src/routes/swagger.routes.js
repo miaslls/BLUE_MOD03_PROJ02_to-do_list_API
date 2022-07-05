@@ -1,12 +1,12 @@
 'use strict';
 
-import express from 'express';
+const express = require('express');
 const router = express.Router();
 
-import swaggerUi from 'swagger-ui-express';
-import swaggerDocument from '../../swagger.json';
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('../../swagger.json');
 
 router.use('/', swaggerUi.serve);
 router.get('/', swaggerUi.setup(swaggerDocument));
 
-export default router;
+module.exports = router;

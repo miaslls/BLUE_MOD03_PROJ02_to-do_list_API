@@ -1,9 +1,9 @@
 'use strict';
 
-import express from 'express';
+const express = require('express');
 const router = express.Router();
 
-import {
+const {
   getAllTasksController,
   getTasklistController,
   getTaskByIdController,
@@ -11,9 +11,9 @@ import {
   updateTaskController,
   deleteTaskController,
   toggleTaskOptionController,
-} from '../controllers/tasks.controller.js';
+} = require('../controllers/tasks.controller.js');
 
-import { validId, validObjectBody } from '../middleware/tasks.middleware.js';
+const { validId, validObjectBody } = require('../middleware/tasks.middleware.js');
 
 router.get('/', getAllTasksController);
 router.get('/:tasklist', getTasklistController);
@@ -23,4 +23,4 @@ router.put('/:id', validId, validObjectBody, updateTaskController);
 router.delete('/:id', validId, deleteTaskController);
 router.put('/:option/:id', validId, toggleTaskOptionController);
 
-export default router;
+module.exports = router;
