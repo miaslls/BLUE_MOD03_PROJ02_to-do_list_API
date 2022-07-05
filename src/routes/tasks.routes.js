@@ -15,12 +15,12 @@ import {
 
 import { validId, validObjectBody } from '../middleware/tasks.middleware.js';
 
-router.get('/tasklist/all', getAllTasksController);
-router.get('/tasklist/:tasklist', getTasklistController);
-router.get('/task/:id', validId, getTaskByIdController);
-router.post('/task/add', validObjectBody, addTaskController);
-router.put('/task/update/:id', validId, validObjectBody, updateTaskController);
-router.delete('/task/delete/:id', validId, deleteTaskController);
-router.put('/task/:option/:id', validId, toggleTaskOptionController);
+router.get('/', getAllTasksController);
+router.get('/:tasklist', getTasklistController);
+router.get('/:id', validId, getTaskByIdController);
+router.post('/', validObjectBody, addTaskController);
+router.put('/:id', validId, validObjectBody, updateTaskController);
+router.delete('/:id', validId, deleteTaskController);
+router.put('/:option/:id', validId, toggleTaskOptionController);
 
 export default router;

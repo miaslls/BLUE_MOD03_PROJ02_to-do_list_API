@@ -2,7 +2,7 @@
 
 import express from 'express';
 import cors from 'cors';
-import routes from './src/routes/tasks.routes.js';
+import taskRoutes from './src/routes/tasks.routes.js';
 import databaseConnection from './src/database/dbConnection.js';
 
 const app = express();
@@ -12,7 +12,7 @@ databaseConnection();
 
 app.use(express.json());
 app.use(cors());
-app.use('/', routes);
+app.use('/tasks', taskRoutes);
 
 app.listen(port, () => {
   console.log(`server running @ http://localhost:${port} 🔗`);
